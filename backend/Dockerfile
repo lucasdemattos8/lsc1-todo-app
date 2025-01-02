@@ -1,15 +1,15 @@
-# Desenvolvimento
-FROM eclipse-temurin:21-jdk
+FROM maven:3.9.9-eclipse-temurin-21 as build
 WORKDIR /app
-COPY pom.xml .
-COPY ./src ./src
 
-# Instalar Maven
-RUN apt-get update && apt-get install -y maven
+COPY pom.xml ./
+COPY ./src ./src/
 
-# Expor porta do Spring e DevTools
+RUN mvn clean install -DskipTests
+
 EXPOSE 8080
 EXPOSE 35729
 
-# Comando para desenvolvimento
-CMD ["./mvnw", "spring-boot:run", "-Dspring-boot.run.jvmArguments='-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000'"]
+ENV DEFAULT_CMD="./mvnw spring-boot:run -Dspring-boot.run.jvmArguments='-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000'"
+ENV TEST_CMD="./mvnw test"
+
+CMD ["/bin/bash", "-c", "if [[ $PROFILE == 'test' ]]; then ${TEST_CMD}; else ${DEFAULT_CMD}; fi"]
