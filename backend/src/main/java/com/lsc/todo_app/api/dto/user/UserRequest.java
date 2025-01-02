@@ -1,15 +1,15 @@
 package com.lsc.todo_app.api.dto.user;
 
-public class CreateUserRequest {
+public class UserRequest {
     
     private String name;
     private String email;
     private String password;
 
-    public CreateUserRequest() {
+    public UserRequest() {
     }
 
-    public CreateUserRequest(String name, String email, String password) {
+    public UserRequest(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;
