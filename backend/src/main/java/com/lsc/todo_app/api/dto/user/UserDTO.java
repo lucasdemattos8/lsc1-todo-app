@@ -11,7 +11,6 @@ public class UserDTO {
     private Long id;
     private String name;
     private String email;
-    private String password;
     private List<TaskSumarryDTO> task;
 
     public UserDTO() {
@@ -21,7 +20,6 @@ public class UserDTO {
         this.id = user.getId();
         this.name = user.getName();
         this.email = user.getEmail();
-        this.password = user.getPassword();
         this.task = user.getTask().stream()
                 .map(TaskSumarryDTO::new)
                 .collect(Collectors.toList());
@@ -49,14 +47,6 @@ public class UserDTO {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public List<TaskSumarryDTO> getTask() {
