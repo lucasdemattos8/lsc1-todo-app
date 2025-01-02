@@ -1,6 +1,7 @@
 package com.lsc.todo_app.domain.entity;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -23,7 +24,7 @@ public class User {
     private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Task> task;
+    private List<Task> task = new ArrayList<>();
 
     public User(){
     }
@@ -62,9 +63,5 @@ public class User {
 
     public List<Task> getTask() {
         return task;
-    }
-
-    public void setTask(List<Task> task) {
-        this.task = task;
     }
 }
