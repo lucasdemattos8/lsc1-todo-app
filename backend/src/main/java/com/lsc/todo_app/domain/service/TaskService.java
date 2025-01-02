@@ -61,7 +61,7 @@ public class TaskService {
     }
 
     public TaskDTO updateTask(Long id, UpdateTaskRequest requestTask) {
-        return taskRepository.findById(id).map(task -> {
+        Task task = taskRepository.findById(id).orElseThrow(() -> new RuntimeException("Task not found with id " + id));
             if (requestTask.getTitle() != null){
                 task.setTitle(requestTask.getTitle());
             }
@@ -74,9 +74,7 @@ public class TaskService {
             task.setUpdatedAt(LocalDateTime.now());
 
             Task taskUpdated = taskRepository.save(task);
-
             return new TaskDTO(taskUpdated, new UserSumarryDTO(taskUpdated.getUser()));
-        }).orElseThrow(() -> new RuntimeException("Task not found with id " + id));
     }
 
     public void deleteTask(Long id) {
@@ -85,5 +83,4 @@ public class TaskService {
         }
         taskRepository.deleteById(id);
     }
-
 }
