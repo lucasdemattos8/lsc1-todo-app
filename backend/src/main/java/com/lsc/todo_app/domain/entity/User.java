@@ -59,4 +59,12 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public List<Task> getTask() {
+        return task;
+    }
+
+    public void setTask(List<Task> task) {
+        this.task = task;
+    }
 }
