@@ -24,7 +24,7 @@ public class User {
     private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Task> task = new ArrayList<>();
+    private List<Task> tasks = new ArrayList<>();
 
     public User(){
     }
@@ -61,7 +61,7 @@ public class User {
         this.password = password;
     }
 
-    public List<Task> getTask() {
-        return task;
+    public List<Task> getTasks() {
+        return tasks;
     }
 }

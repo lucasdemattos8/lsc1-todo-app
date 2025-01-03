@@ -16,8 +16,7 @@ import com.lsc.todo_app.domain.service.UserService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RequestMapping("/api/users")
 @RestController
@@ -43,13 +42,13 @@ public class UserController {
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<UserDTO> updateUser(@RequestParam Long id, @RequestBody UserRequest user) {
+    public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody UserRequest user) {
         UserDTO updatedUser = userService.updateUser(id, user);        
         return ResponseEntity.ok().body(updatedUser);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteUser(@RequestParam Long id){
+    public ResponseEntity<?> deleteUser(@PathVariable Long id){
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }

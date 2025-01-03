@@ -11,7 +11,7 @@ public class UserDTO {
     private Long id;
     private String name;
     private String email;
-    private List<TaskSumarryDTO> task;
+    private List<TaskSumarryDTO> tasks;
 
     public UserDTO() {
     }
@@ -20,7 +20,7 @@ public class UserDTO {
         this.id = user.getId();
         this.name = user.getName();
         this.email = user.getEmail();
-        this.task = user.getTask().stream()
+        this.tasks = user.getTasks().stream()
                 .map(TaskSumarryDTO::new)
                 .collect(Collectors.toList());
     }
@@ -49,11 +49,11 @@ public class UserDTO {
         this.email = email;
     }
 
-    public List<TaskSumarryDTO> getTask() {
-        return task;
+    public List<TaskSumarryDTO> getTasks() {
+        return tasks;
     }
 
-    public void setTask(List<TaskSumarryDTO> task) {
-        this.task = task;
+    public void setTasks(List<TaskSumarryDTO> task) {
+        this.tasks = task;
     }
 }
