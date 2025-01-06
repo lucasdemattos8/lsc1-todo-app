@@ -61,6 +61,12 @@ public class TaskService {
         return new TaskPageDTO(taskSumarryDTOs, taskPage.getNumber(), taskPage.getTotalPages(), taskPage.getTotalElements(), taskPage.getSize());
     }
 
+    public TaskDTO readTaskById(Long id){
+        Task task = taskRepository.findById(id).orElseThrow(() -> new RuntimeException("Task not found with id " + id));
+
+        return new TaskDTO(task, new UserSumarryDTO(task.getUser()));
+    }
+
     public TaskDTO updateTask(Long id, UpdateTaskRequest requestTask) {
         Task task = taskRepository.findById(id).orElseThrow(() -> new RuntimeException("Task not found with id " + id));
             if (requestTask.getTitle() != null){

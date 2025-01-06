@@ -46,6 +46,11 @@ public class UserService {
         return new UserPageDTO(userDTOs, userPage.getNumber(), userPage.getTotalPages(), userPage.getTotalElements(), userPage.getSize());
     }
 
+    public UserDTO readUserById(Long id){
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found with id " + id));
+        return new UserDTO(user);
+    }
+
     public UserDTO updateUser(Long id, UserRequest request) {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found with id " + id));
 

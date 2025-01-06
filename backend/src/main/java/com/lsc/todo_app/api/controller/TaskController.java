@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+
 @RequestMapping("/api/tasks")
 @RestController
 public class TaskController {
@@ -47,6 +48,12 @@ public class TaskController {
         return ResponseEntity.ok().body(taskPage);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<TaskDTO> readTasksById(@PathVariable Long id) {
+        TaskDTO task = taskService.readTaskById(id);
+        return ResponseEntity.ok().body(task);
+    }
+    
     @PutMapping("/{id}")
     public ResponseEntity<TaskDTO> updateTask(@PathVariable Long id, @RequestBody UpdateTaskRequest task) {
         TaskDTO updatedTask = taskService.updateTask(id, task);        

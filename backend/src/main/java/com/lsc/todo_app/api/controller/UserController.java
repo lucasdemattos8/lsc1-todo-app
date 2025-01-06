@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+
 @RequestMapping("/api/users")
 @RestController
 public class UserController {
@@ -44,6 +45,12 @@ public class UserController {
     public ResponseEntity<UserPageDTO> readUsers(Pageable pageable) {
         UserPageDTO userPage = userService.readUsers(pageable);
         return ResponseEntity.ok().body(userPage);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDTO> readUsersById (@PathVariable Long id) {
+        UserDTO user = userService.readUserById(id);
+        return ResponseEntity.ok().body(user);
     }
     
     @PutMapping("/{id}")
