@@ -36,7 +36,7 @@ import com.lsc.todo_app.domain.service.UserService;
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "classpath:application-test.properties")
 @Transactional
-public class TaskControllerTest {
+public class TaskControllerIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
