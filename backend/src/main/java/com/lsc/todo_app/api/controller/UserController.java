@@ -1,5 +1,7 @@
 package com.lsc.todo_app.api.controller;
 
+import java.net.URI;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lsc.todo_app.api.dto.user.UserRequest;
+import com.lsc.todo_app.api.util.URIUtil;
 import com.lsc.todo_app.api.dto.user.UserDTO;
 import com.lsc.todo_app.api.dto.user.UserPageDTO;
 import com.lsc.todo_app.domain.service.UserService;
@@ -32,7 +35,9 @@ public class UserController {
     @PostMapping
     public ResponseEntity<UserDTO> createUser(@RequestBody UserRequest user) {
         UserDTO newUser = userService.createUser(user);
-        return ResponseEntity.ok().body(newUser);
+        URI location = URIUtil.createNewURIById(newUser.getId());
+        
+        return ResponseEntity.created(location).body(newUser);
     }
 
     @GetMapping

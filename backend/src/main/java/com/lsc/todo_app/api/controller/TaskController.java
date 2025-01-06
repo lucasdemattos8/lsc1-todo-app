@@ -1,5 +1,7 @@
 package com.lsc.todo_app.api.controller;
 
+import java.net.URI;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +12,7 @@ import com.lsc.todo_app.api.dto.task.CreateTaskRequest;
 import com.lsc.todo_app.api.dto.task.TaskDTO;
 import com.lsc.todo_app.api.dto.task.TaskPageDTO;
 import com.lsc.todo_app.api.dto.task.UpdateTaskRequest;
+import com.lsc.todo_app.api.util.URIUtil;
 import com.lsc.todo_app.domain.service.TaskService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,7 +36,9 @@ public class TaskController {
     @PostMapping
     public ResponseEntity<TaskDTO> createTask(@RequestBody CreateTaskRequest task) {
         TaskDTO newTask = taskService.createTask(task);
-        return ResponseEntity.ok().body(newTask);
+        URI location = URIUtil.createNewURIById(newTask.getId());
+
+        return ResponseEntity.created(location).body(newTask);
     }
     
     @GetMapping
