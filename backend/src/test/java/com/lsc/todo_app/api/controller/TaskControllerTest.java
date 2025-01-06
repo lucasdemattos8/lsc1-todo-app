@@ -95,6 +95,19 @@ public class TaskControllerTest {
     }
 
     @Test
+    void shouldReadTasksById() throws Exception {
+        mockMvc.perform(get("/api/tasks/" + testTask.getId()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.title", is("Learn HTTP")))
+                .andExpect(jsonPath("$.description", is("Understand the basics of Http")))
+                .andExpect(jsonPath("$.status", is("PENDING")))
+                .andExpect(jsonPath("$.createdAt").exists())
+                .andExpect(jsonPath("$.updatedAt").exists())
+                .andExpect(jsonPath("$.user").exists())
+                .andExpect(jsonPath("$.user.id", is(testUser.getId().intValue())));
+    }
+
+    @Test
     void shouldUpdateTask() throws Exception {
         UpdateTaskRequest updatedTask = new UpdateTaskRequest(
             "Learn Spring", "Understand the basics of Spring Boot", Status.COMPLETED);

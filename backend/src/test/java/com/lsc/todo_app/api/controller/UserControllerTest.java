@@ -44,7 +44,7 @@ public class UserControllerTest {
 
     @BeforeEach
     void setUp() {
-        UserRequest newUser = new UserRequest("João Silva", "joão@gmail.com", "123456");
+        UserRequest newUser = new UserRequest("João Silva", "joao@gmail.com", "123456");
         testUser = userService.createUser(newUser);
     }
 
@@ -73,6 +73,16 @@ public class UserControllerTest {
             .andExpect(jsonPath("$.totalPages", is(1)))
             .andExpect(jsonPath("$.totalElements", is(1)))
             .andExpect(jsonPath("$.pageSize", is(20)));
+    }
+
+    @Test
+    void shouldReadUserById() throws Exception {
+        mockMvc.perform(get("/api/users/" + testUser.getId()))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.id", is(testUser.getId().intValue())))
+            .andExpect(jsonPath("$.name", is("João Silva")))
+            .andExpect(jsonPath("$.email", is("joao@gmail.com")))
+            .andExpect(jsonPath("$.tasks").isEmpty());
     }
 
     @Test
