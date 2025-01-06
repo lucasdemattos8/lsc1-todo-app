@@ -73,7 +73,7 @@ public class TaskControllerTest {
         mockMvc.perform(post("/api/tasks")
                             .contentType(MediaType.APPLICATION_JSON)
                             .content(objectMapper.writeValueAsString(newTask)))
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.title", is("Learn Spring")))
                 .andExpect(jsonPath("$.description", is("Understand the basics of Spring Boot")))
                 .andExpect(jsonPath("$.status", is("PENDING")))

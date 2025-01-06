@@ -55,7 +55,7 @@ public class UserControllerTest {
         mockMvc.perform(post("/api/users")
             .contentType(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(newUser)))
-            .andExpect(status().isOk())
+            .andExpect(status().isCreated())
             .andExpect(jsonPath("$.id").isNumber())
             .andExpect(jsonPath("$.name").value(newUser.getName()))
             .andExpect(jsonPath("$.email").value(newUser.getEmail()))
@@ -96,7 +96,7 @@ public class UserControllerTest {
         mockMvc.perform(post("/api/tasks")
                             .contentType(MediaType.APPLICATION_JSON)
                             .content(objectMapper.writeValueAsString(createTaskRequest)))
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated());
 
         mockMvc.perform(put("/api/users/" + testUser.getId())
                             .contentType(MediaType.APPLICATION_JSON)
