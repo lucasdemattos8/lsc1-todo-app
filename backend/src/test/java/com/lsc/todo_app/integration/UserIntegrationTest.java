@@ -1,4 +1,4 @@
-package com.lsc.todo_app.api.controller;
+package com.lsc.todo_app.integration;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -29,7 +29,7 @@ import com.lsc.todo_app.domain.service.UserService;
 @AutoConfigureMockMvc
 @Transactional
 @TestPropertySource(locations = "classpath:application-test.properties")
-public class UserControllerIntegrationTest {
+public class UserIntegrationTest {
     
     @Autowired
     private MockMvc mockMvc;

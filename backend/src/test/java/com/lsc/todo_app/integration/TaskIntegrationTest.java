@@ -1,4 +1,4 @@
-package com.lsc.todo_app.api.controller;
+package com.lsc.todo_app.integration;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -36,7 +36,7 @@ import com.lsc.todo_app.domain.service.UserService;
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "classpath:application-test.properties")
 @Transactional
-public class TaskControllerIntegrationTest {
+public class TaskIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
