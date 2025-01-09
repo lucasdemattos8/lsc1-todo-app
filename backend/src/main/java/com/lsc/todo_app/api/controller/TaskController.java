@@ -29,15 +29,17 @@ public class TaskController {
     
     @Autowired
     private TaskService taskService;
+    private URIUtil uriUtil;
 
-    public TaskController(TaskService taskService) {
+    public TaskController(TaskService taskService, URIUtil uriUtil) {
         this.taskService = taskService;
+        this.uriUtil = uriUtil;
     }
 
     @PostMapping
     public ResponseEntity<TaskDTO> createTask(@RequestBody CreateTaskRequest task) {
         TaskDTO newTask = taskService.createTask(task);
-        URI location = URIUtil.createNewURIById(newTask.getId());
+        URI location = uriUtil.createNewURIById(newTask.getId());
 
         return ResponseEntity.created(location).body(newTask);
     }

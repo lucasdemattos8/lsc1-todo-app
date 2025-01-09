@@ -28,15 +28,17 @@ public class UserController {
     
     @Autowired
     private UserService userService;
+    private URIUtil uriUtil;
     
-    public UserController(UserService userService) {
+    public UserController(UserService userService, URIUtil uriUtil) {
         this.userService = userService;
+        this.uriUtil = uriUtil;
     }
 
     @PostMapping
     public ResponseEntity<UserDTO> createUser(@RequestBody UserRequest user) {
         UserDTO newUser = userService.createUser(user);
-        URI location = URIUtil.createNewURIById(newUser.getId());
+        URI location = uriUtil.createNewURIById(newUser.getId());
         
         return ResponseEntity.created(location).body(newUser);
     }
