@@ -11,14 +11,14 @@ public class TaskDomainDataFactory {
     private String title;
     private String description;
     private Status status;
-    private LocalDateTime updatedAt ;
+    private LocalDateTime updatedAt;
     private LocalDateTime createdAt;
 
     private UserDomainDataFactory userDataFactory;
 
     public TaskDomainDataFactory(Long id, String title, String description, Status status, LocalDateTime updatedAt, LocalDateTime createdAt, UserDomainDataFactory userDataFactory){
         LocalDateTime defaultUpdatedAt = LocalDateTime.now();
-        LocalDateTime defaultCreatedAt = defaultUpdatedAt.minusHours(3);
+        LocalDateTime defaultCreatedAt = LocalDateTime.now().minusHours(3);
 
         this.id = (id != null) ? id : 1L;
         this.title = (title != null) ? title : "Learn Spring";
