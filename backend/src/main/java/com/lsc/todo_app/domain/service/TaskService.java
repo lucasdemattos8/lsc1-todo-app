@@ -44,7 +44,7 @@ public class TaskService {
         task.setCreatedAt(LocalDateTime.now());
         task.setUpdatedAt(LocalDateTime.now());
 
-        taskRepository.save(task);
+        task = taskRepository.save(task);
         user.getTasks().add(task);
 
         return new TaskDTO(task, new UserSumarryDTO(user));
