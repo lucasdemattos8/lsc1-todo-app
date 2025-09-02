@@ -71,7 +71,7 @@ public class TaskDTODataFactory {
 
     public TaskDTO createTaskDTO() {
         TaskDTO testTask = new TaskDTO();
-        UserSumarryDTO testUser = userDTODataFactory.UserSumarryDTO();
+        UserSumarryDTO testUser = userDTODataFactory.userSumarryDTO();
 
         testTask.setId(id);
         testTask.setTitle(title);
@@ -112,6 +112,6 @@ public class TaskDTODataFactory {
     }
 
     private UserSumarryDTO createTestUser() {
-        return userDTODataFactory.UserSumarryDTO();
+        return userDTODataFactory.userSumarryDTO();
     }
 }
