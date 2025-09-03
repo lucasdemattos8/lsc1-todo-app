@@ -7,7 +7,7 @@ import java.util.List;
 import com.lsc.todo_app.api.dto.task.CreateTaskRequest;
 import com.lsc.todo_app.api.dto.task.TaskDTO;
 import com.lsc.todo_app.api.dto.task.TaskPageDTO;
-import com.lsc.todo_app.api.dto.task.TaskSumarryDTO;
+import com.lsc.todo_app.api.dto.task.TaskSummaryDTO;
 import com.lsc.todo_app.api.dto.task.UpdateTaskRequest;
 import com.lsc.todo_app.api.dto.user.UserSummaryDTO;
 import com.lsc.todo_app.domain.entity.enums.Status;
@@ -84,8 +84,8 @@ public class TaskDTODataFactory {
         return testTask;
     }
 
-    public TaskSumarryDTO createTaskSumarryDTO() {
-        TaskSumarryDTO testTask = new TaskSumarryDTO();
+    public TaskSummaryDTO createTaskSummaryDTO() {
+        TaskSummaryDTO testTask = new TaskSummaryDTO();
 
         testTask.setId(id);
         testTask.setTitle(title);
@@ -95,9 +95,9 @@ public class TaskDTODataFactory {
     }
 
     public TaskPageDTO createTaskPageDTO() {
-        TaskSumarryDTO taskSumarry = createTaskSumarryDTO();
+        TaskSummaryDTO taskSumarry = createTaskSummaryDTO();
 
-        List<TaskSumarryDTO> tasksList = Arrays.asList(taskSumarry);
+        List<TaskSummaryDTO> tasksList = Arrays.asList(taskSumarry);
         TaskPageDTO contentPage = new TaskPageDTO(tasksList, 0, 1, 1, 20);
 
         return contentPage;

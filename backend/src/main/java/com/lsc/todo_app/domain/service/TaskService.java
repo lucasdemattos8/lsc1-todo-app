@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import com.lsc.todo_app.api.dto.task.CreateTaskRequest;
 import com.lsc.todo_app.api.dto.task.TaskDTO;
 import com.lsc.todo_app.api.dto.task.TaskPageDTO;
-import com.lsc.todo_app.api.dto.task.TaskSumarryDTO;
+import com.lsc.todo_app.api.dto.task.TaskSummaryDTO;
 import com.lsc.todo_app.api.dto.task.UpdateTaskRequest;
 import com.lsc.todo_app.api.dto.user.UserSummaryDTO;
 import com.lsc.todo_app.domain.entity.Task;
@@ -53,12 +53,12 @@ public class TaskService {
     public TaskPageDTO readTasks(Pageable pageable) {
         Page<Task> taskPage = taskRepository.findAll(pageable);
 
-        List<TaskSumarryDTO> taskSumarryDTOs = taskPage.getContent().stream()
+        List<TaskSummaryDTO> taskSummaryDTOs = taskPage.getContent().stream()
         .map(task -> {
-            return new TaskSumarryDTO(task);
+            return new TaskSummaryDTO(task);
         }).collect(Collectors.toList());
 
-        return new TaskPageDTO(taskSumarryDTOs, taskPage.getNumber(), taskPage.getTotalPages(), taskPage.getTotalElements(), taskPage.getSize());
+        return new TaskPageDTO(taskSummaryDTOs, taskPage.getNumber(), taskPage.getTotalPages(), taskPage.getTotalElements(), taskPage.getSize());
     }
 
     public TaskDTO readTaskById(Long id){

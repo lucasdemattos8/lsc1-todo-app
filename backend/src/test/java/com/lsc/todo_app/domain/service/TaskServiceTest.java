@@ -31,7 +31,7 @@ import org.springframework.data.domain.Sort;
 import com.lsc.todo_app.api.dto.task.CreateTaskRequest;
 import com.lsc.todo_app.api.dto.task.TaskDTO;
 import com.lsc.todo_app.api.dto.task.TaskPageDTO;
-import com.lsc.todo_app.api.dto.task.TaskSumarryDTO;
+import com.lsc.todo_app.api.dto.task.TaskSummaryDTO;
 import com.lsc.todo_app.api.dto.task.UpdateTaskRequest;
 import com.lsc.todo_app.api.dto.user.UserSummaryDTO;
 import com.lsc.todo_app.domain.entity.Task;
@@ -127,7 +127,7 @@ public class TaskServiceTest {
 
         final TaskPageDTO response = taskService.readTasks(pageable);
 
-        final List<TaskSumarryDTO> responseContent = response.getTasks();
+        final List<TaskSummaryDTO> responseContent = response.getTasks();
         final int expectedElements = 3;
 
         assertNotNull(response);

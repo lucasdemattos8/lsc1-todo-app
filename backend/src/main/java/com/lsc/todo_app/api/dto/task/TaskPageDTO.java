@@ -3,13 +3,13 @@ package com.lsc.todo_app.api.dto.task;
 import java.util.List;
 
 public class TaskPageDTO {
-    private List<TaskSumarryDTO> tasks;
+    private List<TaskSummaryDTO> tasks;
     private int currentPage;
     private int totalPages;
     private long totalElements;
     private int pageSize;
 
-    public TaskPageDTO(List<TaskSumarryDTO> tasks, int currentPage, int totalPages, long totalElements, int pageSize) {
+    public TaskPageDTO(List<TaskSummaryDTO> tasks, int currentPage, int totalPages, long totalElements, int pageSize) {
         this.tasks = tasks;
         this.currentPage = currentPage;
         this.totalPages = totalPages;
@@ -17,7 +17,7 @@ public class TaskPageDTO {
         this.pageSize = pageSize;
     }
 
-    public List<TaskSumarryDTO> getTasks() {
+    public List<TaskSummaryDTO> getTasks() {
         return tasks;
     }
 
