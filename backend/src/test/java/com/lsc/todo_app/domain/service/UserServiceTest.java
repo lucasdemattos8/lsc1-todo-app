@@ -30,7 +30,7 @@ import org.springframework.data.domain.Sort;
 import com.lsc.todo_app.api.dto.user.UserDTO;
 import com.lsc.todo_app.api.dto.user.UserPageDTO;
 import com.lsc.todo_app.api.dto.user.UserRequest;
-import com.lsc.todo_app.api.dto.user.UserSumarryDTO;
+import com.lsc.todo_app.api.dto.user.UserSummaryDTO;
 import com.lsc.todo_app.domain.entity.User;
 import com.lsc.todo_app.domain.repository.UserRepository;
 import com.lsc.todo_app.utils.domain.UserDomainDataFactory;
@@ -94,7 +94,7 @@ public class UserServiceTest {
 
         final UserPageDTO response = userService.readUsers(pageable);
 
-        final List<UserSumarryDTO> responseContent = response.getUsers();
+        final List<UserSummaryDTO> responseContent = response.getUsers();
         final int expectedElements = 3;
 
         assertNotNull(response);
