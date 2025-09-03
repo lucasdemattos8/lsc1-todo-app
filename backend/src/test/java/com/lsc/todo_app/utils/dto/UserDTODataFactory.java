@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.lsc.todo_app.api.dto.task.TaskSumarryDTO;
 import com.lsc.todo_app.api.dto.user.UserDTO;
 import com.lsc.todo_app.api.dto.user.UserRequest;
-import com.lsc.todo_app.api.dto.user.UserSumarryDTO;
+import com.lsc.todo_app.api.dto.user.UserSummaryDTO;
 
 public class UserDTODataFactory {
 
@@ -37,8 +37,8 @@ public class UserDTODataFactory {
         return userDTO;
     }
 
-    public UserSumarryDTO userSumarryDTO() {
-        UserSumarryDTO userSumarryDTO = new UserSumarryDTO();
+    public UserSummaryDTO userSumarryDTO() {
+        UserSummaryDTO userSumarryDTO = new UserSummaryDTO();
         userSumarryDTO.setId(id);
         userSumarryDTO.setName(name);
         userSumarryDTO.setEmail(email);

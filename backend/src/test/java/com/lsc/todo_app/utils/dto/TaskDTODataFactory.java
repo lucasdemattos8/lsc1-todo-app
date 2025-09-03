@@ -9,7 +9,7 @@ import com.lsc.todo_app.api.dto.task.TaskDTO;
 import com.lsc.todo_app.api.dto.task.TaskPageDTO;
 import com.lsc.todo_app.api.dto.task.TaskSumarryDTO;
 import com.lsc.todo_app.api.dto.task.UpdateTaskRequest;
-import com.lsc.todo_app.api.dto.user.UserSumarryDTO;
+import com.lsc.todo_app.api.dto.user.UserSummaryDTO;
 import com.lsc.todo_app.domain.entity.enums.Status;
 
 public class TaskDTODataFactory {
@@ -22,7 +22,7 @@ public class TaskDTODataFactory {
     private LocalDateTime createdAt;
 
     private UserDTODataFactory userDTODataFactory;
-    private UserSumarryDTO testUser;
+    private UserSummaryDTO testUser;
 
     public TaskDTODataFactory(Long id, String title, String description, Status status, LocalDateTime updatedAt, LocalDateTime createdAt, UserDTODataFactory userDTOFactory){
         LocalDateTime defaultUpdatedAt = LocalDateTime.now();
@@ -71,7 +71,7 @@ public class TaskDTODataFactory {
 
     public TaskDTO createTaskDTO() {
         TaskDTO testTask = new TaskDTO();
-        UserSumarryDTO testUser = userDTODataFactory.userSumarryDTO();
+        UserSummaryDTO testUser = userDTODataFactory.userSumarryDTO();
 
         testTask.setId(id);
         testTask.setTitle(title);
@@ -111,7 +111,7 @@ public class TaskDTODataFactory {
         return new UpdateTaskRequest(title, description, status);
     }
 
-    private UserSumarryDTO createTestUser() {
+    private UserSummaryDTO createTestUser() {
         return userDTODataFactory.userSumarryDTO();
     }
 }

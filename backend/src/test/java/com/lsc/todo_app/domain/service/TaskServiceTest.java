@@ -33,7 +33,7 @@ import com.lsc.todo_app.api.dto.task.TaskDTO;
 import com.lsc.todo_app.api.dto.task.TaskPageDTO;
 import com.lsc.todo_app.api.dto.task.TaskSumarryDTO;
 import com.lsc.todo_app.api.dto.task.UpdateTaskRequest;
-import com.lsc.todo_app.api.dto.user.UserSumarryDTO;
+import com.lsc.todo_app.api.dto.user.UserSummaryDTO;
 import com.lsc.todo_app.domain.entity.Task;
 import com.lsc.todo_app.domain.entity.User;
 import com.lsc.todo_app.domain.entity.enums.Status;
@@ -77,7 +77,7 @@ public class TaskServiceTest {
 
         TaskDTO createdTaskDTO = taskService.createTask(createTaskRequest);
 
-        final UserSumarryDTO taskOwner = createdTaskDTO.getUser();
+        final UserSummaryDTO taskOwner = createdTaskDTO.getUser();
 
         assertNotNull(createdTaskDTO.getUpdatedAt());
         assertNotNull(createdTaskDTO.getCreatedAt());
@@ -147,7 +147,7 @@ public class TaskServiceTest {
             Optional.of(task));
 
         final TaskDTO response = taskService.readTaskById(idToFind);
-        final UserSumarryDTO taskOwnerResponse = response.getUser();
+        final UserSummaryDTO taskOwnerResponse = response.getUser();
 
         assertEquals(idToFind, response.getId());
         assertEquals(task.getTitle(), response.getTitle());

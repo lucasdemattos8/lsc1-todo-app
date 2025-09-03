@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.lsc.todo_app.api.dto.user.UserRequest;
 import com.lsc.todo_app.api.dto.user.UserDTO;
 import com.lsc.todo_app.api.dto.user.UserPageDTO;
-import com.lsc.todo_app.api.dto.user.UserSumarryDTO;
+import com.lsc.todo_app.api.dto.user.UserSummaryDTO;
 import com.lsc.todo_app.domain.entity.User;
 import com.lsc.todo_app.domain.repository.UserRepository;
 
@@ -38,9 +38,9 @@ public class UserService {
     public UserPageDTO readUsers(Pageable pageable) {
         Page<User> userPage = userRepository.findAll(pageable);
 
-        List<UserSumarryDTO> userDTOs = userPage.getContent().stream()
+        List<UserSummaryDTO> userDTOs = userPage.getContent().stream()
         .map(user -> {
-            return new UserSumarryDTO(user);
+            return new UserSummaryDTO(user);
         }).collect(Collectors.toList());
 
         return new UserPageDTO(userDTOs, userPage.getNumber(), userPage.getTotalPages(), userPage.getTotalElements(), userPage.getSize());

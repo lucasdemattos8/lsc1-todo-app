@@ -26,7 +26,7 @@ import org.springframework.http.ResponseEntity;
 import com.lsc.todo_app.api.dto.user.UserDTO;
 import com.lsc.todo_app.api.dto.user.UserPageDTO;
 import com.lsc.todo_app.api.dto.user.UserRequest;
-import com.lsc.todo_app.api.dto.user.UserSumarryDTO;
+import com.lsc.todo_app.api.dto.user.UserSummaryDTO;
 import com.lsc.todo_app.api.util.URIUtil;
 import com.lsc.todo_app.domain.service.UserService;
 import com.lsc.todo_app.utils.dto.UserDTODataFactory;
@@ -76,9 +76,9 @@ public class UserControllerTest {
     @DisplayName("Should read pageable users and return 200 status with non-null UserPageDTO body")
     @Test
     void shouldReadCorrectlyUsers() {
-        UserSumarryDTO userSumarryDTO = userDTODataFactory.userSumarryDTO();
+        UserSummaryDTO userSumarryDTO = userDTODataFactory.userSumarryDTO();
 
-        List<UserSumarryDTO> userList = Arrays.asList(userSumarryDTO);
+        List<UserSummaryDTO> userList = Arrays.asList(userSumarryDTO);
 
         UserPageDTO contentPage = new UserPageDTO(userList, 0, 1, 1, 20);
 

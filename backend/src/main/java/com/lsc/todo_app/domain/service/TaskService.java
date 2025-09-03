@@ -14,7 +14,7 @@ import com.lsc.todo_app.api.dto.task.TaskDTO;
 import com.lsc.todo_app.api.dto.task.TaskPageDTO;
 import com.lsc.todo_app.api.dto.task.TaskSumarryDTO;
 import com.lsc.todo_app.api.dto.task.UpdateTaskRequest;
-import com.lsc.todo_app.api.dto.user.UserSumarryDTO;
+import com.lsc.todo_app.api.dto.user.UserSummaryDTO;
 import com.lsc.todo_app.domain.entity.Task;
 import com.lsc.todo_app.domain.entity.User;
 import com.lsc.todo_app.domain.entity.enums.Status;
@@ -47,7 +47,7 @@ public class TaskService {
         task = taskRepository.save(task);
         user.getTasks().add(task);
 
-        return new TaskDTO(task, new UserSumarryDTO(user));
+        return new TaskDTO(task, new UserSummaryDTO(user));
     }
 
     public TaskPageDTO readTasks(Pageable pageable) {
@@ -64,7 +64,7 @@ public class TaskService {
     public TaskDTO readTaskById(Long id){
         Task task = taskRepository.findById(id).orElseThrow(() -> new RuntimeException("Task not found with id " + id));
 
-        return new TaskDTO(task, new UserSumarryDTO(task.getUser()));
+        return new TaskDTO(task, new UserSummaryDTO(task.getUser()));
     }
 
     public TaskDTO updateTask(Long id, UpdateTaskRequest requestTask) {
@@ -81,7 +81,7 @@ public class TaskService {
             task.setUpdatedAt(LocalDateTime.now());
 
             Task taskUpdated = taskRepository.save(task);
-            return new TaskDTO(taskUpdated, new UserSumarryDTO(taskUpdated.getUser()));
+            return new TaskDTO(taskUpdated, new UserSummaryDTO(taskUpdated.getUser()));
     }
 
     public void deleteTask(Long id) {
