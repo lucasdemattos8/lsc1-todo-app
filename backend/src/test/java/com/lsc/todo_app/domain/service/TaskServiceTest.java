@@ -197,7 +197,81 @@ public class TaskServiceTest {
         assertEquals(updateRequestDTO.getStatus(), response.getStatus());
         assertEquals(task.getCreatedAt(), response.getCreatedAt());
         assertTrue(beforeUpdateTask.isBefore(afterUpdateTask));
+    }
+
+    @Test
+    @DisplayName("Should update a Task correctly when title is not provided")
+    void shouldUpdateTaskWhenTitleIsNotProvided() {
+        Task task = taskDomainDataFactory.createTaskWithUser();
+        task.setUpdatedAt(LocalDateTime.now().minusHours(1L));
+        String originalTitle = task.getTitle();
         
+        final Long idToUpdate = 1L;
+        final UpdateTaskRequest updateRequestDTO = new UpdateTaskRequest(null, "Estou sendo testado", Status.COMPLETED);
+        final LocalDateTime beforeUpdateTask = task.getUpdatedAt();
+
+        when(taskRepository.findById(idToUpdate)).thenReturn(Optional.of(task));
+        when(taskRepository.save(any(Task.class))).thenAnswer(invocation -> invocation.getArgument(0));
+
+        final TaskDTO response = taskService.updateTask(idToUpdate, updateRequestDTO);
+        final LocalDateTime afterUpdateTask = response.getUpdatedAt();
+
+        assertEquals(idToUpdate, response.getId());
+        assertEquals(originalTitle, response.getTitle());
+        assertEquals(updateRequestDTO.getDescription(), response.getDescription());
+        assertEquals(updateRequestDTO.getStatus(), response.getStatus());
+        assertEquals(task.getCreatedAt(), response.getCreatedAt());
+        assertTrue(beforeUpdateTask.isBefore(afterUpdateTask));
+    }
+
+    @Test
+    @DisplayName("Should update a Task correctly when description is not provided")
+    void shouldUpdateTaskWhenDescriptionIsNotProvided() {
+        Task task = taskDomainDataFactory.createTaskWithUser();
+        task.setUpdatedAt(LocalDateTime.now().minusHours(1L));
+        String originalDescription = task.getDescription();
+        
+        final Long idToUpdate = 1L;
+        final UpdateTaskRequest updateRequestDTO = new UpdateTaskRequest("Teste", null, Status.COMPLETED);
+        final LocalDateTime beforeUpdateTask = task.getUpdatedAt();
+
+        when(taskRepository.findById(idToUpdate)).thenReturn(Optional.of(task));
+        when(taskRepository.save(any(Task.class))).thenAnswer(invocation -> invocation.getArgument(0));
+
+        final TaskDTO response = taskService.updateTask(idToUpdate, updateRequestDTO);
+        final LocalDateTime afterUpdateTask = response.getUpdatedAt();
+
+        assertEquals(idToUpdate, response.getId());
+        assertEquals(updateRequestDTO.getTitle(), response.getTitle());
+        assertEquals(originalDescription, response.getDescription());
+        assertEquals(updateRequestDTO.getStatus(), response.getStatus());
+        assertEquals(task.getCreatedAt(), response.getCreatedAt());
+        assertTrue(beforeUpdateTask.isBefore(afterUpdateTask));
+    }
+
+    @Test
+    @DisplayName("Should update a Task correctly when status is not provided")
+    void shouldUpdateTaskWhenStatusIsNotProvided() {
+        Task task = taskDomainDataFactory.createTaskWithUser();
+        task.setUpdatedAt(LocalDateTime.now().minusHours(1L));
+        Status originalStatus = task.getStatus();
+        
+        final Long idToUpdate = 1L;
+        final UpdateTaskRequest updateRequestDTO = new UpdateTaskRequest("Teste", "Estou sendo testado", null);
+        final LocalDateTime beforeUpdateTask = task.getUpdatedAt();
+
+        when(taskRepository.findById(idToUpdate)).thenReturn(Optional.of(task));
+        when(taskRepository.save(any(Task.class))).thenAnswer(invocation -> invocation.getArgument(0));
+
+        final TaskDTO response = taskService.updateTask(idToUpdate, updateRequestDTO);
+        final LocalDateTime afterUpdateTask = response.getUpdatedAt();
+
+        assertEquals(idToUpdate, response.getId());
+        assertEquals(updateRequestDTO.getTitle(), response.getTitle());
+        assertEquals(updateRequestDTO.getDescription(), response.getDescription());
+        assertEquals(originalStatus, response.getStatus());
+        assertEquals(task.getCreatedAt(), response.getCreatedAt());
+        assertTrue(beforeUpdateTask.isBefore(afterUpdateTask));
     }
 
     @Test

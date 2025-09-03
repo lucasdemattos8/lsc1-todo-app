@@ -158,6 +158,72 @@ public class UserServiceTest {
     }
 
     @Test
+    @DisplayName("Should update an User correctly when password is not provided")
+    void shouldUpdateUserWhenPasswordIsNotProvided() {
+        final Long idToUpdate = 1L;
+        User user = userDomainDataFactory.createUserWithoutTasks();
+        user.setId(idToUpdate);
+        String originalPassword = user.getPassword();
+
+        final UserRequest updateRequestDTO = new UserRequest("Tester", "teste@gmail.com", null);
+
+        when(userRepository.findById(idToUpdate)).thenReturn(Optional.of(user));
+        when(userRepository.save(any(User.class))).thenAnswer(invocation -> invocation.getArgument(0));
+
+        final UserDTO response = userService.updateUser(idToUpdate, updateRequestDTO);
+
+        assertEquals(idToUpdate, response.getId());
+        assertEquals(updateRequestDTO.getName(), response.getName());
+        assertEquals(updateRequestDTO.getEmail(), response.getEmail());
+        assertEquals(originalPassword, user.getPassword());
+        assertEquals(user.getTasks().size(), response.getTasks().size());
+    }
+
+    @Test
+    @DisplayName("Should update an User correctly when name is not provided")
+    void shouldUpdateUserWhenNameIsNotProvided() {
+        final Long idToUpdate = 1L;
+        User user = userDomainDataFactory.createUserWithoutTasks();
+        user.setId(idToUpdate);
+        String originalName = user.getName();
+
+        final UserRequest updateRequestDTO = new UserRequest(null, "teste@gmail.com", "teste123");
+
+        when(userRepository.findById(idToUpdate)).thenReturn(Optional.of(user));
+        when(userRepository.save(any(User.class))).thenAnswer(invocation -> invocation.getArgument(0));
+
+        final UserDTO response = userService.updateUser(idToUpdate, updateRequestDTO);
+
+        assertEquals(idToUpdate, response.getId());
+        assertEquals(originalName, response.getName());
+        assertEquals(updateRequestDTO.getEmail(), response.getEmail());
+        assertEquals(updateRequestDTO.getPassword(), user.getPassword());
+        assertEquals(user.getTasks().size(), response.getTasks().size());
+    }
+
+    @Test
+    @DisplayName("Should update an User correctly when email is not provided")
+    void shouldUpdateUserWhenEmailIsNotProvided() {
+        final Long idToUpdate = 1L;
+        User user = userDomainDataFactory.createUserWithoutTasks();
+        user.setId(idToUpdate);
+        String originalEmail = user.getEmail();
+
+        final UserRequest updateRequestDTO = new UserRequest("Tester", null, "teste123");
+
+        when(userRepository.findById(idToUpdate)).thenReturn(Optional.of(user));
+        when(userRepository.save(any(User.class))).thenAnswer(invocation -> invocation.getArgument(0));
+
+        final UserDTO response = userService.updateUser(idToUpdate, updateRequestDTO);
+
+        assertEquals(idToUpdate, response.getId());
+        assertEquals(updateRequestDTO.getName(), response.getName());
+        assertEquals(originalEmail, response.getEmail());
+        assertEquals(updateRequestDTO.getPassword(), user.getPassword());
+        assertEquals(user.getTasks().size(), response.getTasks().size());
+    }
+
+    @Test
     @DisplayName("Should throws an Exception when User doesnt exists by the provided ID from repository when Update User")
     void shouldThrowsExceptionWhenInUpdateUserDoesntExistsTheProvidedID() {
         final Long nonexistingID = 99L;
