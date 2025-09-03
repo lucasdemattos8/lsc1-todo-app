@@ -104,8 +104,8 @@ public class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Should return correctly a TaskDTO data by ID from repository")
-    void shouldReturnCorrectlyATaskDTOFromRepository() {
+    @DisplayName("Should return correctly a UserDTO data by ID from repository")
+    void shouldReturnCorrectlyAUserDTOFromRepository() {
         final User user = userDomainDataFactory.createUserWithoutTasks();
         final Long idToFind = 1L;
 
@@ -158,7 +158,7 @@ public class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Should throws an Exception when User doesnt exists by the provided ID from repository when Update Task")
+    @DisplayName("Should throws an Exception when User doesnt exists by the provided ID from repository when Update User")
     void shouldThrowsExceptionWhenInUpdateUserDoesntExistsTheProvidedID() {
         final Long nonexistingID = 99L;
         final UserRequest updateRequestDTO = new UserRequest("Tester", "teste@gmail.com", "teste123");
