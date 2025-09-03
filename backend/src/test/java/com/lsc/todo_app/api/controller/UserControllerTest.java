@@ -76,9 +76,9 @@ public class UserControllerTest {
     @DisplayName("Should read pageable users and return 200 status with non-null UserPageDTO body")
     @Test
     void shouldReadCorrectlyUsers() {
-        UserSummaryDTO userSumarryDTO = userDTODataFactory.userSumarryDTO();
+        UserSummaryDTO userSummaryDTO = userDTODataFactory.userSummaryDTO();
 
-        List<UserSummaryDTO> userList = Arrays.asList(userSumarryDTO);
+        List<UserSummaryDTO> userList = Arrays.asList(userSummaryDTO);
 
         UserPageDTO contentPage = new UserPageDTO(userList, 0, 1, 1, 20);
 

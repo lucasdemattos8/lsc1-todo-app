@@ -37,13 +37,13 @@ public class UserDTODataFactory {
         return userDTO;
     }
 
-    public UserSummaryDTO userSumarryDTO() {
-        UserSummaryDTO userSumarryDTO = new UserSummaryDTO();
-        userSumarryDTO.setId(id);
-        userSumarryDTO.setName(name);
-        userSumarryDTO.setEmail(email);
+    public UserSummaryDTO userSummaryDTO() {
+        UserSummaryDTO userSummaryDTO = new UserSummaryDTO();
+        userSummaryDTO.setId(id);
+        userSummaryDTO.setName(name);
+        userSummaryDTO.setEmail(email);
 
-        return userSumarryDTO;
+        return userSummaryDTO;
     }
 
     public UserRequest userRequest() {
