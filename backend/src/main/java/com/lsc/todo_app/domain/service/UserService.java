@@ -31,8 +31,8 @@ public class UserService {
         user.setEmail(request.getEmail());
         user.setPassword(request.getPassword());
 
-        userRepository.save(user);
-        return new UserDTO(user);
+        User savedUser = userRepository.save(user);
+        return new UserDTO(savedUser);
     }
 
     public UserPageDTO readUsers(Pageable pageable) {
