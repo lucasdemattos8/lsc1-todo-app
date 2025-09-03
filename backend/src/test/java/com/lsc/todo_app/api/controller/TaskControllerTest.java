@@ -11,7 +11,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.net.URI;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,10 +28,9 @@ import com.lsc.todo_app.api.dto.task.TaskDTO;
 import com.lsc.todo_app.api.dto.task.TaskPageDTO;
 import com.lsc.todo_app.api.dto.task.TaskSumarryDTO;
 import com.lsc.todo_app.api.dto.task.UpdateTaskRequest;
-import com.lsc.todo_app.api.dto.user.UserSumarryDTO;
 import com.lsc.todo_app.api.util.URIUtil;
-import com.lsc.todo_app.domain.entity.enums.Status;
 import com.lsc.todo_app.domain.service.TaskService;
+import com.lsc.todo_app.utils.dto.TaskDTODataFactory;
 
 @DisplayName("TaskController - CRUD Unit Tests")
 public class TaskControllerTest {
@@ -46,29 +44,24 @@ public class TaskControllerTest {
     @Mock
     private URIUtil uriUtil;
 
-    private UserSumarryDTO testUser;
-    private TaskDTO testTask;
+    private TaskDTODataFactory taskDTODataFactory;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
 
-        testUser = new UserSumarryDTO();
-        testUser.setId(1L);
-        testUser.setName("John Marston");
-        testUser.setEmail("john.marston@gmail.com");
-
-        LocalDateTime updatedAt = LocalDateTime.now();
-        LocalDateTime createdAt = LocalDateTime.now().minusHours(3L);
-        testTask = new TaskDTO(1L, "Learn Spring", "Learn the basics of Spring", Status.COMPLETED, createdAt, updatedAt, testUser);
+        taskDTODataFactory = new TaskDTODataFactory();
     }
 
     @DisplayName("Should create a task and return 201 status with non-null TaskDTO body")
     @Test
     void shouldCreateCorrectlyTask() {
-        CreateTaskRequest request = new CreateTaskRequest(testTask.getTitle(), testTask.getDescription(), testTask.getUser().getId());
-        when(taskService.createTask(any(CreateTaskRequest.class))).thenReturn(testTask);
-        when(uriUtil.createNewURIById(1L)).thenReturn(URI.create("http://localhost/tasks/1"));
+        final URI expectedURI = URI.create("http://localhost/tasks/1");
+        CreateTaskRequest request = taskDTODataFactory.createCreateTaskRequest();
+        TaskDTO taskDTO = taskDTODataFactory.createTaskDTO();
+
+        when(taskService.createTask(any(CreateTaskRequest.class))).thenReturn(taskDTO);
+        when(uriUtil.createNewURIById(1L)).thenReturn(expectedURI);
 
         ResponseEntity<TaskDTO> response = taskController.createTask(request);
 
@@ -83,10 +76,7 @@ public class TaskControllerTest {
     @DisplayName("Should read pageable tasks and return 200 status with non-null TaskPageDTO body")
     @Test
     void shouldReadCorrectlyTasks() {
-        TaskSumarryDTO taskSumarry = new TaskSumarryDTO();
-        taskSumarry.setId(testTask.getId());
-        taskSumarry.setTitle(testTask.getTitle());
-        taskSumarry.setDescription(testTask.getDescription());
+        TaskSumarryDTO taskSumarry = taskDTODataFactory.createTaskSumarryDTO();
 
         List<TaskSumarryDTO> tasksList = Arrays.asList(taskSumarry);
 
@@ -107,7 +97,9 @@ public class TaskControllerTest {
     @DisplayName("Should read a task by ID and return 200 status with non-null TaskDTO body")
     @Test
     void shouldReadCorrectlyTask() {
-        when(taskService.readTaskById(anyLong())).thenReturn(testTask);
+        TaskDTO taskDTO = taskDTODataFactory.createTaskDTO();
+
+        when(taskService.readTaskById(anyLong())).thenReturn(taskDTO);
 
         ResponseEntity<TaskDTO> response = taskController.readTasksById(1L);
 
@@ -122,7 +114,8 @@ public class TaskControllerTest {
     @DisplayName("Should update a task by ID and return 200 status with non-null TaskDTO body")
     @Test
     void shouldUpdateCorrectlyTask() {
-        UpdateTaskRequest updateRequest = new UpdateTaskRequest("Learn React", "Learn the basics of React", Status.COMPLETED);
+        TaskDTO testTask = taskDTODataFactory.createTaskDTO();
+        UpdateTaskRequest updateRequest = taskDTODataFactory.createUpdateTaskRequest();
 
         when(taskService.updateTask(anyLong(), any(UpdateTaskRequest.class))).thenReturn(testTask);
 
@@ -139,6 +132,8 @@ public class TaskControllerTest {
     @DisplayName("Should delete a task by ID and return 204 status with null body")
     @Test
     void shouldDeleteCorrectlyTask() {
+        TaskDTO testTask = taskDTODataFactory.createTaskDTO();
+
         doNothing().when(taskService).deleteTask(anyLong());
 
         ResponseEntity<?> response = taskController.deleteTask(testTask.getId());
