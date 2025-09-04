@@ -26,9 +26,9 @@ jobs:
 
       - name: Build docker-compose services
         run: |
-          docker compose -f Docker-compose.yml up -d --build
-          docker compose ps
+          docker compose --profile dev -f Docker-compose.yml up -d --build
+          docker compose --profile dev ps
 
       - name: Shutdown
         if: always()
-        run: docker compose -f Docker-compose.yml down
+        run: docker compose --profile dev -f Docker-compose.yml down
