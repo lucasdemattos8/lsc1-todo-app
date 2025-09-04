@@ -2,10 +2,10 @@ package com.lsc.todo_app.utils.dto;
 
 import java.util.ArrayList;
 
-import com.lsc.todo_app.api.dto.task.TaskSumarryDTO;
+import com.lsc.todo_app.api.dto.task.TaskSummaryDTO;
 import com.lsc.todo_app.api.dto.user.UserDTO;
 import com.lsc.todo_app.api.dto.user.UserRequest;
-import com.lsc.todo_app.api.dto.user.UserSumarryDTO;
+import com.lsc.todo_app.api.dto.user.UserSummaryDTO;
 
 public class UserDTODataFactory {
 
@@ -32,18 +32,18 @@ public class UserDTODataFactory {
         userDTO.setId(id);
         userDTO.setName(name);
         userDTO.setEmail(email);
-        userDTO.setTasks(new ArrayList<TaskSumarryDTO>());
+        userDTO.setTasks(new ArrayList<TaskSummaryDTO>());
 
         return userDTO;
     }
 
-    public UserSumarryDTO userSumarryDTO() {
-        UserSumarryDTO userSumarryDTO = new UserSumarryDTO();
-        userSumarryDTO.setId(id);
-        userSumarryDTO.setName(name);
-        userSumarryDTO.setEmail(email);
+    public UserSummaryDTO userSummaryDTO() {
+        UserSummaryDTO userSummaryDTO = new UserSummaryDTO();
+        userSummaryDTO.setId(id);
+        userSummaryDTO.setName(name);
+        userSummaryDTO.setEmail(email);
 
-        return userSumarryDTO;
+        return userSummaryDTO;
     }
 
     public UserRequest userRequest() {
