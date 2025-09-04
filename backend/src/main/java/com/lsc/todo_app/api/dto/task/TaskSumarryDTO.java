@@ -2,16 +2,16 @@ package com.lsc.todo_app.api.dto.task;
 
 import com.lsc.todo_app.domain.entity.Task;
 
-public class TaskSummaryDTO {
+public class TaskSumarryDTO {
 
     private Long id;
     private String title;
     private String description;
 
-    public TaskSummaryDTO() {
+    public TaskSumarryDTO() {
     }
 
-    public TaskSummaryDTO(Task task) {
+    public TaskSumarryDTO(Task task) {
         this.id = task.getId();
         this.title = task.getTitle();
         this.description = task.getDescription();

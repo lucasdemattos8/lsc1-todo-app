@@ -2,16 +2,16 @@ package com.lsc.todo_app.api.dto.user;
 
 import com.lsc.todo_app.domain.entity.User;
 
-public class UserSummaryDTO {
+public class UserSumarryDTO {
 
     private Long id;
     private String name;
     private String email;
 
-    public UserSummaryDTO() {
+    public UserSumarryDTO() {
     }
 
-    public UserSummaryDTO(User user) {
+    public UserSumarryDTO(User user) {
         this.id = user.getId();
         this.name = user.getName();
         this.email = user.getEmail();

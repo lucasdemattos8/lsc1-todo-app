@@ -7,9 +7,9 @@ import java.util.List;
 import com.lsc.todo_app.api.dto.task.CreateTaskRequest;
 import com.lsc.todo_app.api.dto.task.TaskDTO;
 import com.lsc.todo_app.api.dto.task.TaskPageDTO;
-import com.lsc.todo_app.api.dto.task.TaskSummaryDTO;
+import com.lsc.todo_app.api.dto.task.TaskSumarryDTO;
 import com.lsc.todo_app.api.dto.task.UpdateTaskRequest;
-import com.lsc.todo_app.api.dto.user.UserSummaryDTO;
+import com.lsc.todo_app.api.dto.user.UserSumarryDTO;
 import com.lsc.todo_app.domain.entity.enums.Status;
 
 public class TaskDTODataFactory {
@@ -22,7 +22,7 @@ public class TaskDTODataFactory {
     private LocalDateTime createdAt;
 
     private UserDTODataFactory userDTODataFactory;
-    private UserSummaryDTO testUser;
+    private UserSumarryDTO testUser;
 
     public TaskDTODataFactory(Long id, String title, String description, Status status, LocalDateTime updatedAt, LocalDateTime createdAt, UserDTODataFactory userDTOFactory){
         LocalDateTime defaultUpdatedAt = LocalDateTime.now();
@@ -71,7 +71,7 @@ public class TaskDTODataFactory {
 
     public TaskDTO createTaskDTO() {
         TaskDTO testTask = new TaskDTO();
-        UserSummaryDTO testUser = userDTODataFactory.userSummaryDTO();
+        UserSumarryDTO testUser = userDTODataFactory.userSumarryDTO();
 
         testTask.setId(id);
         testTask.setTitle(title);
@@ -84,8 +84,8 @@ public class TaskDTODataFactory {
         return testTask;
     }
 
-    public TaskSummaryDTO createTaskSummaryDTO() {
-        TaskSummaryDTO testTask = new TaskSummaryDTO();
+    public TaskSumarryDTO createTaskSumarryDTO() {
+        TaskSumarryDTO testTask = new TaskSumarryDTO();
 
         testTask.setId(id);
         testTask.setTitle(title);
@@ -95,9 +95,9 @@ public class TaskDTODataFactory {
     }
 
     public TaskPageDTO createTaskPageDTO() {
-        TaskSummaryDTO taskSumarry = createTaskSummaryDTO();
+        TaskSumarryDTO taskSumarry = createTaskSumarryDTO();
 
-        List<TaskSummaryDTO> tasksList = Arrays.asList(taskSumarry);
+        List<TaskSumarryDTO> tasksList = Arrays.asList(taskSumarry);
         TaskPageDTO contentPage = new TaskPageDTO(tasksList, 0, 1, 1, 20);
 
         return contentPage;
@@ -111,7 +111,7 @@ public class TaskDTODataFactory {
         return new UpdateTaskRequest(title, description, status);
     }
 
-    private UserSummaryDTO createTestUser() {
-        return userDTODataFactory.userSummaryDTO();
+    private UserSumarryDTO createTestUser() {
+        return userDTODataFactory.userSumarryDTO();
     }
 }

@@ -3,7 +3,7 @@ package com.lsc.todo_app.api.dto.user;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.lsc.todo_app.api.dto.task.TaskSummaryDTO;
+import com.lsc.todo_app.api.dto.task.TaskSumarryDTO;
 import com.lsc.todo_app.domain.entity.User;
 
 public class UserDTO {
@@ -11,7 +11,7 @@ public class UserDTO {
     private Long id;
     private String name;
     private String email;
-    private List<TaskSummaryDTO> tasks;
+    private List<TaskSumarryDTO> tasks;
 
     public UserDTO() {
     }
@@ -21,7 +21,7 @@ public class UserDTO {
         this.name = user.getName();
         this.email = user.getEmail();
         this.tasks = user.getTasks().stream()
-                .map(TaskSummaryDTO::new)
+                .map(TaskSumarryDTO::new)
                 .collect(Collectors.toList());
     }
 
@@ -49,11 +49,11 @@ public class UserDTO {
         this.email = email;
     }
 
-    public List<TaskSummaryDTO> getTasks() {
+    public List<TaskSumarryDTO> getTasks() {
         return tasks;
     }
 
-    public void setTasks(List<TaskSummaryDTO> task) {
+    public void setTasks(List<TaskSumarryDTO> task) {
         this.tasks = task;
     }
 }
