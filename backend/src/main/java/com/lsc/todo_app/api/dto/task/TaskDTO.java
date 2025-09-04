@@ -2,7 +2,7 @@ package com.lsc.todo_app.api.dto.task;
 
 import java.time.LocalDateTime;
 
-import com.lsc.todo_app.api.dto.user.UserSummaryDTO;
+import com.lsc.todo_app.api.dto.user.UserSumarryDTO;
 import com.lsc.todo_app.domain.entity.Task;
 import com.lsc.todo_app.domain.entity.enums.Status;
 
@@ -14,12 +14,12 @@ public class TaskDTO {
     private Status status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private UserSummaryDTO user;
+    private UserSumarryDTO user;
 
     public TaskDTO() {
     }
 
-    public TaskDTO(Long id, String title, String description, Status status, LocalDateTime createdAt, LocalDateTime updatedAt, UserSummaryDTO user) {
+    public TaskDTO(Long id, String title, String description, Status status, LocalDateTime createdAt, LocalDateTime updatedAt, UserSumarryDTO user) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -29,7 +29,7 @@ public class TaskDTO {
         this.user = user;
     }
 
-    public TaskDTO(Task task, UserSummaryDTO user) {
+    public TaskDTO(Task task, UserSumarryDTO user) {
         this.id = task.getId();
         this.title = task.getTitle();
         this.description = task.getDescription();
@@ -75,10 +75,10 @@ public class TaskDTO {
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
-    public UserSummaryDTO getUser() {
+    public UserSumarryDTO getUser() {
         return user;
     }
-    public void setUser(UserSummaryDTO user) {
+    public void setUser(UserSumarryDTO user) {
         this.user = user;
     }
 }

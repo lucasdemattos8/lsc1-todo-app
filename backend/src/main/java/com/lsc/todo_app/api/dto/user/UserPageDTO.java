@@ -4,13 +4,13 @@ import java.util.List;
 
 public class UserPageDTO {
 
-    List<UserSummaryDTO> users;
+    List<UserSumarryDTO> users;
     int currentPage;
     int totalPages;
     long totalElements;
     int pageSize;
 
-    public UserPageDTO(List<UserSummaryDTO> users, int currentPage, int totalPages, long totalElements, int pageSize) {
+    public UserPageDTO(List<UserSumarryDTO> users, int currentPage, int totalPages, long totalElements, int pageSize) {
         this.users = users;
         this.currentPage = currentPage;
         this.totalPages = totalPages;
@@ -18,7 +18,7 @@ public class UserPageDTO {
         this.pageSize = pageSize;
     }
 
-    public List<UserSummaryDTO> getUsers() {
+    public List<UserSumarryDTO> getUsers() {
         return users;
     }
 

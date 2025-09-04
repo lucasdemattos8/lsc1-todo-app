@@ -26,7 +26,7 @@ import org.springframework.http.ResponseEntity;
 import com.lsc.todo_app.api.dto.task.CreateTaskRequest;
 import com.lsc.todo_app.api.dto.task.TaskDTO;
 import com.lsc.todo_app.api.dto.task.TaskPageDTO;
-import com.lsc.todo_app.api.dto.task.TaskSummaryDTO;
+import com.lsc.todo_app.api.dto.task.TaskSumarryDTO;
 import com.lsc.todo_app.api.dto.task.UpdateTaskRequest;
 import com.lsc.todo_app.api.util.URIUtil;
 import com.lsc.todo_app.domain.service.TaskService;
@@ -76,9 +76,9 @@ public class TaskControllerTest {
     @DisplayName("Should read pageable tasks and return 200 status with non-null TaskPageDTO body")
     @Test
     void shouldReadCorrectlyTasks() {
-        TaskSummaryDTO taskSumarry = taskDTODataFactory.createTaskSummaryDTO();
+        TaskSumarryDTO taskSumarry = taskDTODataFactory.createTaskSumarryDTO();
 
-        List<TaskSummaryDTO> tasksList = Arrays.asList(taskSumarry);
+        List<TaskSumarryDTO> tasksList = Arrays.asList(taskSumarry);
 
         TaskPageDTO contentPage = new TaskPageDTO(tasksList, 0, 1, 1, 20);
 
