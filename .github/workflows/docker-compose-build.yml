@@ -24,8 +24,7 @@ jobs:
       - name: Run tests
         run: |
           cd backend
-          docker-compose exec -T app npm test
-          # docker-compose exec -T backend ./mvn test
+          docker-compose exec -T backend ./mvn test
 
       - name: Shutdown
         if: always()
