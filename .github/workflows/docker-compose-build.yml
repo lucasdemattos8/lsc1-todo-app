@@ -2,22 +2,19 @@ name: Docker Compose Build
 
 on:
   pull_request:
-    branches: ["main"]
+    branches: ["main", "develop"]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout da branch do PR
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Configura Docker Buildx (otimiza build)
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      # Exporta secrets para o ambiente
       - name: Set environment variables
         run: |
           echo "DB_NAME=${{ secrets.DB_NAME }}" >> $GITHUB_ENV
@@ -27,13 +24,11 @@ jobs:
           echo "PGADMIN_DEFAULT_PASSWORD=${{ secrets.PGADMIN_DEFAULT_PASSWORD }}" >> $GITHUB_ENV
           echo "PROFILE=${{ secrets.PROFILE }}" >> $GITHUB_ENV
 
-      # Sobe containers para validar o build
       - name: Build docker-compose services
         run: |
-          docker-compose -f Docker-compose.yml up -d --build
-          docker-compose ps
+          docker compose -f Docker-compose.yml up -d --build
+          docker compose ps
 
-      # Derruba containers no fim (mesmo em caso de erro)
       - name: Shutdown
         if: always()
-        run: docker-compose -f Docker-compose.yml down
+        run: docker compose -f Docker-compose.yml down
