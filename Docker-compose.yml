@@ -1,67 +1,38 @@
+version: "3.9"
+
 services:
-  backend:
-    build:
-      context: ./backend
-    ports:
-      - "8080:8080"
-      - "35729:35729"
-      - "8000:8000"
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/${DB_NAME}
-      SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
-      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
-      PROFILE: ${PROFILE}
-    volumes:
-      - ./backend:/app
-    depends_on:
-      - database
-    profiles:
-      - dev
-      - test
-
-  frontend:
-    build:
-      context: ./frontend
-    ports:
-      - "4173:4173"
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-    profiles:
-      - dev
-
-  database:
+  postgres:
     image: postgres:15
+    container_name: lsc1-todo-app-db
     environment:
-      POSTGRES_DB: ${DB_NAME}
-      POSTGRES_USER: ${DB_USERNAME}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: todo_app
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     ports:
       - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
-    profiles:
-      - dev
-      - test
 
-  h2db:
-    image: oscarfonts/h2:latest
-    container_name: h2db
+  backend:
+    build: ./backend
+    container_name: lsc1-todo-app-backend
+    depends_on:
+      - postgres
     ports:
-      - "9092:9092"
-    profiles:
-      - test
-
-  pgadmin:
-    image: dpage/pgadmin4
-    restart: always
+      - "8080:8080"
     environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      SPRING_PROFILES_ACTIVE: dev
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/todo_app
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+
+  frontend:
+    build: ./frontend
+    container_name: lsc1-todo-app-frontend
     ports:
-      - "5050:80"
-    profiles:
-      - dev
+      - "4173:4173"
+    depends_on:
+      - backend
 
 volumes:
   db_data:
