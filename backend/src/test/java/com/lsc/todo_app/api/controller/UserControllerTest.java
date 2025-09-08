@@ -86,7 +86,7 @@ public class UserControllerTest {
 
         ResponseEntity<UserPageDTO> response = userController.readUsers(Pageable.unpaged());
 
-        assertNotNull(response);
+        assertNull(response);
         assertEquals(200, response.getStatusCode().value());
 
         assertNotNull(response.getBody());
