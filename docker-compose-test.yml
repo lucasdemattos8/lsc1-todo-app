@@ -1,0 +1,11 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./backend
+    container_name: lsc1-todo-app-backend
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: test
+    command: mvn test
