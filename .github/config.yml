@@ -1,0 +1,14 @@
+# Configuração de templates de Pull Request
+
+pull_request_template:
+  - name: "🚀 Nova Feature"
+    path: "PULL_REQUEST_TEMPLATE/feature.md"
+    description: "Use este template ao adicionar novas funcionalidades"
+
+  - name: "🐞 Bugfix"
+    path: "PULL_REQUEST_TEMPLATE/bugfix.md"
+    description: "Use este template ao corrigir erros ou falhas existentes"
+
+  - name: "🛠️ Refactor / Manutenção"
+    path: "PULL_REQUEST_TEMPLATE/refactor.md"
+    description: "Use este template ao melhorar código existente sem mudar comportamento"
